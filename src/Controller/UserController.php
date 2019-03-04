@@ -1,9 +1,22 @@
 <?php
-namespace src\Controller; 
+namespace Controller; 
+use Core\Controller; 
 
-class UserController {
+//require_once 'Core/Controller.php';
 
-    public function run(){
-        echo __CLASS__ . "[OK]" . PHP_EOL; 
+
+
+class UserController extends Controller {
+
+    //public $name; 
+
+    function __construct() {
+        echo "je suis UserController \n";
     }
+
+    public function addAction(){
+        echo 'L\' action est ajouter ';
+    }
+
+
 }

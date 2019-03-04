@@ -2,10 +2,13 @@
 
 spl_autoload_register(function($class){
     $file = str_replace('\\', DIRECTORY_SEPARATOR ,$class) . '.php';
-    include $file;
-    if(class_exists($class)){
-        return true;
-    } else {
-        return false; 
+    $file_src = 'src'. DIRECTORY_SEPARATOR .str_replace('\\', DIRECTORY_SEPARATOR ,$class). '.php';
+
+    if(file_exists($file)){
+        require_once $file;
+    }
+    
+    if(file_exists($file_src)){
+        require_once $file_src; 
     }
 });
