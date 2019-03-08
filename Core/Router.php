@@ -1,7 +1,6 @@
 <?php
 namespace Core; 
 
-
 Class Router
 {
 
@@ -18,9 +17,6 @@ Class Router
         } else {
             return false; 
         }
-        // retourne un tableau associatif contenant
-        // + le controller a instancier
-        // + la méthode du controller a appeler
         // + un tableau contenant les paramètres à passer à la méthode du contoller
     }
 }

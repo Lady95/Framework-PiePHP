@@ -1,11 +1,17 @@
 <?php
 namespace Controller; 
 use Core\Controller; 
+use Core\Request;
+use Model\UserModel; 
 
 class UserController extends Controller {
 
+    public $data; 
+
     function __construct() {
         //echo "je suis UserController \n";
+        $this->data = new Request($_REQUEST);
+        //var_dump($this->data);
     }
 
     public function addAction(){
@@ -17,7 +23,10 @@ class UserController extends Controller {
     }
 
     public function registerAction(){
-        echo 'inscription !!';
+        var_dump($this->data);
+        //  $register = new UserModel(); 
+
+        $this->render('register');
     }
 
 
