@@ -1,12 +1,13 @@
 <?php
 namespace Core; 
-require_once 'routes.php';
+
 
 Class Router
 {
+
     private static $routes;
-    
-    public static function connect ($url, $route) {
+
+    public static function connect($url, $route) {
         self::$routes[$url] = $route;
     }
     
@@ -23,3 +24,4 @@ Class Router
         // + un tableau contenant les paramètres à passer à la méthode du contoller
     }
 }
+

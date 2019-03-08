@@ -7,12 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <form action="../../../index.php" method="post">
+        <form action="/projet_perso/w2php502p1/user/login" method="post">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+            <input type="text" name="email" id="email">
             <br>
             <label for="password">password</label>
-            <input type="password" name="password" id="password">
+            <input type="text" name="password" id="password">
 
             <input type="submit" name="Submit" value="submit">
         </form>

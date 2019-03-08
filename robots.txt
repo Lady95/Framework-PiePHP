@@ -21,3 +21,24 @@
         //     $Controller = new Controller();
         //     $Controller-> PageError404();
         // }
+
+
+         if(empty($urlCase[3]) && empty($urlCase[4])){
+            $app = new AppController(); 
+            $app->indexAction(); 
+        } 
+
+        if($urlCase[3] !== "user" || (!empty($urlCase[4]) && $urlCase[4] !==  "add")){
+            $Controller = new Controller();
+            $Controller-> PageError404();
+
+        } elseif ($urlCase[3] === "user"){
+            $UserController = "Controller\\".ucwords($urlCase[3])."Controller"; 
+            $control = new $UserController();
+            
+            if(!empty($urlCase[4]) && $urlCase[4] === "add") {
+                $method = $urlCase[4] . 'Action'; 
+                $control->$method();
+            }
+            
+        } 

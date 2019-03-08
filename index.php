@@ -1,7 +1,7 @@
 
 <!-- <pre>
 <?php
-//  var_dump($_POST, $_GET, $_SERVER);
+// var_dump($_POST, $_GET, $_SERVER);
 ?>
 </pre>  -->
 
@@ -11,5 +11,4 @@
 
     $app = new Core\Core();
     $app->run();
-   
 ?>
