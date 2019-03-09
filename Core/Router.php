@@ -3,9 +3,7 @@ namespace Core;
 
 Class Router
 {
-
     private static $routes;
-
     public static function connect($url, $route) {
         self::$routes[$url] = $route;
     }

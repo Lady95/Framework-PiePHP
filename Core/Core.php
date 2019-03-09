@@ -2,8 +2,7 @@
 namespace Core; 
 use Core\Controller; 
 use Core\Router; 
-// use Core\Database;
-// use Model\UserModel;
+
 class Core {
     
     public function run(){

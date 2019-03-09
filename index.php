@@ -12,5 +12,4 @@
     $app = new Core\Core();
     $app->run();
 
-    //$database = new Core\Database();
 ?>

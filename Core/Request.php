@@ -4,7 +4,7 @@ namespace Core;
 
 class Request 
 {
-    public $input;
+    private $input;
 
     public function __construct($input)
     {
@@ -12,14 +12,12 @@ class Request
 
         foreach($input as $key => $value){
             $this->input[$key] = trim(htmlspecialchars(stripslashes($value))); 
-            //$replace = array($key => trim(htmlspecialchars(stripslashes($value))));
-            //$input = array_replace($input, $replace);
-
+            
         }
-        //var_dump($this->input);
-        return $input; 
     }
 
-    
-
+    public function getInput()
+    {
+        return $this->input;
+    }
 }
