@@ -20,6 +20,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/projet_perso/w2php502p1/user/register">Register</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projet_perso/w2php502p1/user">Home User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projet_perso/w2php502p1/user/read">Users</a>
+                    </li>
                 </ul>
             </div>
         </nav>

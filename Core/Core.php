@@ -12,7 +12,6 @@ class Core {
         $racine = str_replace(BASE_URI, '',$url); // "/"
         $r2 = rtrim($racine, '/');
         $urlCase = explode('/', $racine);
-        //var_dump($urlCase[1]);
 
         if(empty($urlCase[1])){
             $Router = Router::get($racine);

@@ -9,13 +9,11 @@ Class Router
     }
     
     public static function get($url) {
-
         if(array_key_exists($url, self::$routes)){
             return self::$routes[$url]; 
         } else {
-            return false; 
+            return ['controller'=> 'error', 'action' =>'error404']; 
         }
-        // + un tableau contenant les paramètres à passer à la méthode du contoller
     }
 }
 

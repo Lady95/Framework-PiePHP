@@ -20,12 +20,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/projet_perso/w2php502p1/user/register">Register</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projet_perso/w2php502p1/user">Home User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projet_perso/w2php502p1/user/read">Users</a>
+                    </li>
                 </ul>
             </div>
         </nav>
         <main class="container mt-5">
         <h1>Login</h1>
-            <form action="/projet_perso/w2php502p1/user/login" method="post">
+            <form method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" class="form-control" name="email" id="email">
