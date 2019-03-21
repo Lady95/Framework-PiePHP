@@ -5,79 +5,89 @@ use Core\Request;
 use Model\UserModel; 
 
 class UserController extends Controller {
-    
-    private $data; 
-    private $dataInput = []; 
-    
-    function __construct() {
-        $this->data = new Request($_REQUEST);
-        $this->data->getInput();
-        $array = (array) $this->getData();
-        foreach ($array as $key => $value) {
-            foreach ($value as $key => $value) {
-                $this->dataInput[$key] = $value; 
-            }
-        }
-    }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
 
     public function indexAction() {
+        session_start();
         $this->render('index'); 
     }
 
     public function loginAction(){
         extract($this->dataInput); 
-        
         if(!empty($_POST)){
-            $methodUser = new UserModel();
+            $methodUser = new UserModel($this->dataInput);
             $result_login = $methodUser->checkUser($email, $password); 
-            if($result_login!= false){
+            
+            if($result_login != false){
                 echo 'Connect success !';
                 session_start();
-                $_SESSION['id'] = $result_login['id']; 
-                $_SESSION['email'] = $result_login['email'];
-                $_SESSION['password'] = $result_login['password'];
+                $_SESSION['id'] = $result_login[0]['id']; 
+                $_SESSION['email'] = $result_login[0]['email'];
+                $_SESSION['password'] = $result_login[0]['password'];
             } else {
                 echo 'email or password inncorrect'; 
             }
         }
-        
         $this->render('login'); 
     }
     
     public function registerAction(){
-        
-        extract($this->dataInput);
-        
+        session_start();
+        extract($this->dataInput);   
         if(!empty($_POST)){
-            $methodUser = new UserModel();
-            //create 
-            if(!empty($email_register) && (!empty($password_register))){
-                $verif = $methodUser->create($email_register, $password_register);
+            $methodUser = new UserModel($this->dataInput);
+            if(!empty($email) && (!empty($password))){
+                $verif = $methodUser->save();
                 if($verif === false){
                     echo 'No register.'; 
                 } else {
-                    var_dump($verif);
                     echo 'register sucess !';
                 }
             }
         }
-        $this->render('register');
+        $this->render('register'); 
     }
 
     public function readerAction(){
-        $methodUser = new UserModel();
-        $users = $methodUser->read_all();
-
+        session_start();
+        $methodUser = new UserModel($this->dataInput);
+        $users = UserModel::findAll();
+        //var_dump($users->email);
+        // $users = $methodUser->update('20', array('email'=>'azerty','password' => 'azerty'));
+        // //var_dump($users->email = 'zerty');
+        // //var_dump($users->password = 'zerty');
         $this->render('show', $users);
-        
-        // var_dump($users['0']);
-        // var_dump($users);
-        
+        UserModel::getTab(); 
+        extract($this->dataInput);
+       
+        if(!empty($_POST)){
+            if(!empty($email_UPDT) && !empty($pass_UPDT) && !empty($id_UPDT)  && !empty($submit_UPDT)){
+                $result = $methodUser->update($id_UPDT); 
+                if($result == true){
+                    echo "update success !!!";
+                } else {
+                    echo "echec update";
+                }
+            } else {
+                echo 'files empty'; 
+            }
+            if(!empty($id_DEL)){
+                $methodUser->delete1($id_DEL); 
+            } else {
+                echo 'user delete'; 
+            }
+        }
+    }
+
+    public function profilAction() {
+        session_start();
+        $this->render('profil');
+    }
+
+    public function updateProfilAction(){
+        echo "Update profile";
+    }
+
+    public function deleteProfilAction(){
+        echo "Delete profile";
     }
 }

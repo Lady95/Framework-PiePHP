@@ -22,14 +22,14 @@ class Core {
         if($Router != false){
             foreach ($Router as $key => $value){
                 if ($key === "controller"){
-                    $Controller = "Controller\\".ucwords($value)."Controller"; 
+                    $Controller = "Controller\\".ucwords($value)."Controller";
                     if(class_exists($Controller)){
                         $control = new $Controller();
                     }  
                 } 
                 if ($key === "action"){
                     $Action = $value."Action"; 
-                    if (method_exists($control,$Action)){
+                    if (method_exists($control, $Action)){
                         $control->$Action();
                     }
                 }  
@@ -38,5 +38,27 @@ class Core {
             $control = new Controller(); 
             $control->PageError404();
         }
+
+         //////// Route Dynamique///////
+        // if(empty($urlCase[3]) && empty($urlCase[4])){
+        //     $app = new AppController(); 
+        //     $app->indexAction(); 
+        // } 
+
+        // if($urlCase[3] !== "user" || (!empty($urlCase[4]) && $urlCase[4] !==  "add")){
+        //     $Controller = new Controller();
+        //     $Controller-> PageError404();
+
+        // } elseif ($urlCase[3] === "user"){
+        //     $UserController = "Controller\\".ucwords($urlCase[3])."Controller"; 
+        //     $control = new $UserController();
+            
+        //     if(!empty($urlCase[4]) && $urlCase[4] === "add") {
+        //         $method = $urlCase[4] . 'Action'; 
+        //         $control->$method();
+        //     }
+            
+        // } 
+
     }
 }

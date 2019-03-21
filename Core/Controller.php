@@ -1,27 +1,53 @@
 <?php
-
 namespace Core;
 use Core\Request; 
 
 class Controller 
 {
     protected static $_render; 
-    
+    protected $data; 
+    protected $dataInput = []; 
+
+    function __construct() {
+
+        $this->data = new Request($_REQUEST);
+        $this->data->getInput();
+        $array = (array) $this->getData();
+        foreach ($array as $key => $value) {
+            foreach ($value as $key => $value) {
+                $this->dataInput[$key] = $value; 
+            }
+        }
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
     function __destruct() {
         echo self::$_render;
     }
     
-    public function PageError404(){
-        
-        require 'src/View/Error/404.php'; 
-    }
-    
     protected function render($view, $scope = []) {
-        $r = extract($scope);
-        $tab=[];
-        if(empty($r)){
-            var_dump(extract($scope, EXTR_PREFIX_ALL, 'user'));
+        $tab =[];
+        if(is_object($scope)){
+            $tabobj= (array) $scope; 
+            $extract = extract($tabobj);
+            
+            foreach($scope as $key => $value){
+                    $tab[$key] = $value;
+            }
+        } else {
+            $extract = extract($scope);
+            if(empty($extract)){
+                foreach($scope as $key => $value){
+                    $tab[$key] = $value;
+                }
+             }
         }
+       
+        
         $class = str_replace('\\', '', basename(get_class($this)));
         $f = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View', str_replace('Controller', '', $class), $view]) . '.php';
         if (file_exists($f)) {

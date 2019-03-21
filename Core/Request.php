@@ -1,5 +1,4 @@
 <?php
-
 namespace Core;
 
 class Request 
@@ -11,8 +10,7 @@ class Request
         $this->input = $input;
 
         foreach($input as $key => $value){
-            $this->input[$key] = trim(htmlspecialchars(stripslashes($value))); 
-            
+            $this->input[$key] = str_replace(' ','', trim(htmlspecialchars(stripslashes($value)))); 
         }
     }
 

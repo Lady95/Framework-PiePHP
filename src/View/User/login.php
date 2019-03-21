@@ -14,18 +14,27 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
+                <?php if(empty($_SESSION['id'])):  ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/projet_perso/w2php502p1/user/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projet_perso/w2php502p1/user/register">Register</a>
+                        <a class="nav-link" href="register">Register</a>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if(isset($_SESSION['id'])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/projet_perso/w2php502p1/user/">Home User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projet_perso/w2php502p1/user">Home User</a>
+                        <a class="nav-link" href="profil">Profil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projet_perso/w2php502p1/user/read">Users</a>
+                        <a class="nav-link" href="read">Users</a>
                     </li>
+                <?php endif; ?>
+                    
                 </ul>
             </div>
         </nav>
