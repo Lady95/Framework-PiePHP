@@ -5,8 +5,9 @@ use Core\Database;
 
 class Entity
 {
-   public $arrayTab = [];
+   private $arrayTab = [];
    public static $result; 
+   
    public function __construct($tabAttribut = []) {
       if (isset($tabAttribut)){
          foreach($tabAttribut as $key => $value) {
@@ -18,28 +19,27 @@ class Entity
    
    public function save() {
       $orm = new ORM(); 
-      
-      //var_dump($this->arrayTab);
       $result = $orm->create(self::getTab(), $this->arrayTab); 
-      return $result; 
-   }
-   
-   public function read($id) {
-      $orm = new ORM(); 
-      $result = $orm->read(self::getTab(), $id); 
-      //return $result; 
       if($result != false) {
          $class = get_class();
-        
-            self::$result = new $class($result);
-         
+          self::$result = new $class(array('id' => $result));
       } 
       return self::$result;
    }
    
-   public function update($id, $tab) {
+   public function read($id) {
       $orm = new ORM(); 
-      $result = $orm->update(self::getTab(), $id, $tab);
+      $result = $orm->read(self::getTab(), $id);  
+      if($result != false) {
+         $class = get_class();
+         self::$result = new $class($result);
+      } 
+      return self::$result;
+   }
+   
+   public function update($id, $fields) {
+      $orm = new ORM(); 
+      $result = $orm->update(self::getTab(), $id, $fields);
       return $result;
    }
    
@@ -48,11 +48,10 @@ class Entity
       $result = $orm->delete(self::getTab(), $id); 
       return $result;
    }
-
+   
    public static function getTab() {
       $tab = str_replace('\\', '', basename(get_called_class()));
       $result =  strtolower(str_replace('Model', '', $tab)).'s';
-      //var_dump($result);
       return $result; 
    }
    
@@ -67,8 +66,20 @@ class Entity
       } 
       return self::$result;
    }
-
-   public static function findAll() {
+   
+   public function findLogin($params) {
+      $orm = new ORM(); 
+      $result = $orm->find(self::getTab(), $params); 
+      if($result != false) {
+         $class= get_class();
+         foreach($result as $key => $value){
+            self::$result = new $class($value);
+         }   
+      } 
+      return self::$result;
+   }
+   
+   public static function readAll() {
       $orm = new ORM(); 
       $class = get_class();
       $result = $orm->find(self::getTab()); 
@@ -76,16 +87,9 @@ class Entity
          $func = function($index) use ($class){
             return new $class($index);
          }; 
-        return $func($result);
+         return $func($result);
       } 
-      // foreach($result as $key => $value){
-      //    $func = function($index) use ($class){
-      //       return new $class($index);
-      //    }; 
-      //       $r = $func($value);
-      //       return $r;
-      // }
+      
    }
-   
    
 }

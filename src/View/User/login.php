@@ -8,7 +8,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">PiePHP</a>
+            <a class="navbar-brand" href="/projet_perso/w2php502p1/">My Cinema</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,7 +34,6 @@
                         <a class="nav-link" href="read">Users</a>
                     </li>
                 <?php endif; ?>
-                    
                 </ul>
             </div>
         </nav>
@@ -48,7 +47,7 @@
 
                 <div class="form-group">
                     <label for="password">password</label>
-                    <input type="text" class="form-control" name="password" id="password">
+                    <input type="password" class="form-control" name="password" id="password">
                 </div>
                     <input type="submit" class="btn btn-primary" value="submit">
             </form>

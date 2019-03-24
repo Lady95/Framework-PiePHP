@@ -7,24 +7,19 @@ class Controller
     protected static $_render; 
     protected $data; 
     protected $dataInput = []; 
-
+    
     function __construct() {
-
+        
         $this->data = new Request($_REQUEST);
         $this->data->getInput();
-        $array = (array) $this->getData();
+        $array = (array) $this->data;
         foreach ($array as $key => $value) {
             foreach ($value as $key => $value) {
                 $this->dataInput[$key] = $value; 
             }
         }
     }
-
-    public function getData()
-    {
-        return $this->data;
-    }
-
+    
     function __destruct() {
         echo self::$_render;
     }
@@ -32,11 +27,11 @@ class Controller
     protected function render($view, $scope = []) {
         $tab =[];
         if(is_object($scope)){
-            $tabobj= (array) $scope; 
+            $tabobj = (array) $scope; 
             $extract = extract($tabobj);
             
             foreach($scope as $key => $value){
-                    $tab[$key] = $value;
+                $tab[$key] = $value;
             }
         } else {
             $extract = extract($scope);
@@ -44,9 +39,9 @@ class Controller
                 foreach($scope as $key => $value){
                     $tab[$key] = $value;
                 }
-             }
+            }
         }
-       
+        
         
         $class = str_replace('\\', '', basename(get_class($this)));
         $f = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'src', 'View', str_replace('Controller', '', $class), $view]) . '.php';

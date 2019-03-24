@@ -4,7 +4,7 @@ namespace Model;
 use Core\Entity; 
 
 class UserModel extends Entity {
-    
+    public $id;
     public $email; 
     public $password;
     // public function save($email, $password){

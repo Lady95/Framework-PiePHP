@@ -4,9 +4,8 @@ use Core\Database;
 use \PDO;
 
 class ORM extends Database {
-
+    
     public function create($table, $fields){
-
         $tabvalue =[];
         $keys = array_keys($fields); 
         $keysArray = implode(", ", $keys);
@@ -15,7 +14,7 @@ class ORM extends Database {
         foreach($values as $value){
             array_push($tabvalue, "'".$value."'"); 
         }
-
+        
         $valuesArray = implode(", ", $tabvalue);
         $query = $this->pdo->prepare("INSERT INTO {$table} ({$keysArray}) VALUES ({$valuesArray})");
         $executeOK = $query->execute();  
@@ -37,14 +36,13 @@ class ORM extends Database {
     }
     
     public function update($table, $id, $fields){
-       $tabFields = []; 
+        $tabFields = []; 
         foreach($fields as $key => $value) { 
             array_push($tabFields, "{$key} = '{$value}'"); 
         }
-
+        
         $updateCol = implode(", ", $tabFields);
         $sql = "UPDATE {$table} SET {$updateCol} WHERE id = {$id}"; 
-        var_dump($sql);
         $query = $this->pdo->prepare($sql); 
         $executeOK = $query->execute();
         if($executeOK){
@@ -63,11 +61,12 @@ class ORM extends Database {
             return false; 
         }
     }
-
+    
     public function find($table, $params = array(
-            'WHERE' => '1',
-            'ORDER BY' => 'id ASC',
-            'LIMIT' => '')) {
+        'WHERE' => '1',
+        'ORDER BY' => 'id ASC',
+        'LIMIT' => ''
+        )) {
             $tabParams = []; 
             foreach($params as $key => $value) { 
                 if(empty($value)){
@@ -79,6 +78,7 @@ class ORM extends Database {
             $arrParam = implode(" " ,$tabParams);
             $query = $this->pdo->query("SELECT * FROM {$table} {$arrParam} "); 
             return $query->fetchAll(PDO::FETCH_ASSOC);
-
+            
+            
         }    
-}
+    }

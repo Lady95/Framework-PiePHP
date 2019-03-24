@@ -9,10 +9,10 @@ class Core {
         require_once 'routes.php';
         
         $url = $_SERVER['REQUEST_URI'];
-        $racine = str_replace(BASE_URI, '',$url); // "/"
+        $racine = str_replace(BASE_URI, '',$url); 
         $r2 = rtrim($racine, '/');
         $urlCase = explode('/', $racine);
-
+        
         if(empty($urlCase[1])){
             $Router = Router::get($racine);
         } else{
@@ -34,31 +34,33 @@ class Core {
                     }
                 }  
             }
-        } else {
-            $control = new Controller(); 
-            $control->PageError404();
-        }
-
-         //////// Route Dynamique///////
-        // if(empty($urlCase[3]) && empty($urlCase[4])){
-        //     $app = new AppController(); 
-        //     $app->indexAction(); 
-        // } 
-
-        // if($urlCase[3] !== "user" || (!empty($urlCase[4]) && $urlCase[4] !==  "add")){
-        //     $Controller = new Controller();
-        //     $Controller-> PageError404();
-
-        // } elseif ($urlCase[3] === "user"){
-        //     $UserController = "Controller\\".ucwords($urlCase[3])."Controller"; 
-        //     $control = new $UserController();
+        } 
+        // else {
+            //     $control = new Controller(); 
+            //     $control->PageError404();
+            // }
             
-        //     if(!empty($urlCase[4]) && $urlCase[4] === "add") {
-        //         $method = $urlCase[4] . 'Action'; 
-        //         $control->$method();
-        //     }
-            
-        // } 
-
-    }
-}
+            //////// Route Dynamique///////
+            // if(empty($urlCase[3]) && empty($urlCase[4])){
+                //     $app = new AppController(); 
+                //     $app->indexAction(); 
+                // } 
+                
+                // if($urlCase[3] !== "user" || (!empty($urlCase[4]) && $urlCase[4] !==  "add")){
+                    //     $Controller = new Controller();
+                    //     $Controller-> PageError404();
+                    
+                    // } elseif ($urlCase[3] === "user"){
+                        //     $UserController = "Controller\\".ucwords($urlCase[3])."Controller"; 
+                        //     $control = new $UserController();
+                        
+                        //     if(!empty($urlCase[4]) && $urlCase[4] === "add") {
+                            //         $method = $urlCase[4] . 'Action'; 
+                            //         $control->$method();
+                            //     }
+                            
+                            // } 
+                            
+                        }
+                    }
+                    
