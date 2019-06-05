@@ -22,7 +22,7 @@ class Entity
       $result = $orm->create(self::getTab(), $this->arrayTab); 
       if($result != false) {
          $class = get_class();
-          self::$result = new $class(array('id' => $result));
+         self::$result = new $class(array('id' => $result));
       } 
       return self::$result;
    }
